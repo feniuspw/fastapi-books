@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  fastapi:
+    container_name: fastapi-books-api
+    image: python:3.11.1
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: tail -f >> /dev/null
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    depends_on:
+      - db
+    networks:
+      - fastapi-net
+
+  db:
+    container_name: fastapi-books-db
+    image: postgres
+    environment:
+      POSTGRES_DB: postsdb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    networks:
+      - fastapi-net
+
+networks:
+  fastapi-net:
+    driver: bridge
