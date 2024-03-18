@@ -21,7 +21,7 @@ services:
     container_name: fastapi-books-db
     image: postgres
     environment:
-      POSTGRES_DB: postsdb
+      POSTGRES_DB: booksdb
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
     networks:
